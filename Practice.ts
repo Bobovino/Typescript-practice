@@ -65,3 +65,59 @@ function checkStudentStatus(person: Person2): string {
     return person.isStudent ?? false ? "A student indeed" : "Not a student";
 }
 
+/*Generics
+Problem 6: Create a generic function named wrapInArray that takes a value 
+of any type and returns an array of that type. The function should work 
+with strings, numbers, or any other type.
+
+Approach: Use TypeScript generics to make the function versatile. 
+Generics allow you to write a component or function that can work over a variety of types 
+rather than a single one.
+    */
+
+function wrapInArray<T>(value:T):T[]{
+    let valueArray:T[]=[value]
+    return valueArray
+}
+
+/*Exercise 7: Mapped Types
+Problem: Create a mapped type Optional that takes an interface and makes all of its properties optional.
+
+Approach: Mapped types allow you to take an existing model and transform each of its properties into a new type.
+ Use this to iterate over the keys of an object type and modify their properties. */
+
+
+type Optional<T>={
+    [K in keyof T]?:T[K]
+}
+
+/*Exercise 8: Conditional Types
+Problem: Write a TypeScript type called StringOrArray which should be a string 
+if a boolean flag isString is true, or an array of strings if isString is false.
+
+Approach: Conditional types in TypeScript allow your type to behave differently based on some condition. 
+They are a way to introduce some form of type logic. */
+
+type StringOrArray<T extends boolean>= T extends true ? string : string[]
+
+/*Exercise 9: Type Guards
+Problem: Create a function named isString that takes an input of type string | number 
+and returns true if the input is a string, or false otherwise.
+
+Approach: Type guards allow you to narrow down the type of an object within a conditional block. 
+TypeScript is smart enough to know which type the variable can be at any given time. */
+
+type stringOrNumber=string|number
+
+function isString(input:stringOrNumber):boolean{
+    return typeof input ==="string"
+}
+
+/*Exercise 10: Utility Types - Readonly
+Problem: Given an interface Person (from Exercise 1), create a type ImmutablePerson 
+where all the Person properties are read-only.
+
+Approach: TypeScript provides several utility types to transform types in a flexible way. 
+One of these is Readonly, which makes all properties of a type read-only. */
+
+type ImmutablePerson =Readonly<Person>
